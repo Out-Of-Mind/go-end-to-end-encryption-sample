@@ -7,5 +7,5 @@ It's end to end encryption sample written on golang
 $ go build encryption-sample.go
 ```
 
-then just run this file and you'll see the exemple
+then just run this file and you'll see the example
 
