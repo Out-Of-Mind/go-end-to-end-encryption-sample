@@ -2,6 +2,7 @@ package main
 
 import (
 		"golang.org/x/crypto/curve25519"
+		"encoding/hex"
 		"math/rand"
 		"crypto/aes"
 		"crypto/cipher"
@@ -98,22 +99,22 @@ func main() {
 		Alisa := New(pu2, pr2)
 		fmt.Println("before exchanging of keys")
 		// printing Bob's pair of keys
-		fmt.Println("Bob's public and private keys: \n\tpublic: "+string(Bob.pubKey[:])+"\n\tprivate: "+string(Bob.privKey[:]))
+		fmt.Println("Bob's public and private keys: \n\tpublic: "+hex.EncodeToString(Bob.pubKey[:])+"\n\tprivate: "+hex.EncodeToString(Bob.privKey[:]))
 		// printing Alisa's pair of keys
-		fmt.Println("Alisa's public and private keys: \n\tpublic: "+string(Alisa.pubKey[:])+"\n\tprivate: "+string(Alisa.privKey[:]))
+		fmt.Println("Alisa's public and private keys: \n\tpublic: "+hex.EncodeToString(Alisa.pubKey[:])+"\n\tprivate: "+hex.EncodeToString(Alisa.privKey[:]))
 		// public keys exchanging
 		Alisa.pubKey, Bob.pubKey = Bob.pubKey, Alisa.pubKey
 		fmt.Println("after exchanging of keys")
 		// printing Bob's pair of keys after exchanging
-		fmt.Println("Bob's public and private keys: \n\tpublic: "+string(Bob.pubKey[:])+"\n\tprivate: "+string(Bob.privKey[:]))
+		fmt.Println("Bob's public and private keys: \n\tpublic: "+hex.EncodeToString(Bob.pubKey[:])+"\n\tprivate: "+hex.EncodeToString(Bob.privKey[:]))
 		// printing Alisa's pair of keys after exchanging
-		fmt.Println("Alisa's public and private keys: \n\tpublic: "+string(Alisa.pubKey[:])+"\n\tprivate: "+string(Alisa.privKey[:]))
+		fmt.Println("Alisa's public and private keys: \n\tpublic: "+hex.EncodeToString(Alisa.pubKey[:])+"\n\tprivate: "+hex.EncodeToString(Alisa.privKey[:]))
 		// generate Bob's out key to encrypt/decrypt messages
 		Bob.key = gen_out(Bob.pubKey, Bob.privKey)
 		// generating Alisa's out key to encrypt/decrypr messages
 		Alisa.key = gen_out(Alisa.pubKey, Alisa.privKey)
 		// printing generated out keys
-		fmt.Println("Generated out keys:\n\tBob's: ( "+string(Bob.key[:])+" )\n\tAlisa's: ("+string(Alisa.key[:])+" )")
+		fmt.Println("Generated out keys:\n\tBob's: ( "+hex.EncodeToString(Bob.key[:])+" )\n\tAlisa's: ("+hex.EncodeToString(Alisa.key[:])+" )")
 		// new AES instance with Alisa's out key
 		a := NewAES(Alisa.key)
 		// new AES instance with Bob's out key
